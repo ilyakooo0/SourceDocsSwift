@@ -8,13 +8,8 @@
 
 import Foundation
 
-//let directory = "/Users/ilya/Developer/Dotrix/Dotrix/"
-//let output = "/Users/ilya/Desktop/foo.tex"
-
 let args = Array(CommandLine.arguments.dropFirst())
 let temp = FileManager.default.temporaryDirectory.appendingPathComponent("SourceDocsSwift/build\(Date().timeIntervalSince1970)")
-
-print(temp)
 
 var output = "docs.tex"
 var directory: String?
