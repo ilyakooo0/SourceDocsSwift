@@ -13,19 +13,56 @@ let args = Array(CommandLine.arguments.dropFirst())
 
 var output = "docs.tex"
 var directory: String?
+var style: TeXer.TexType = .laTeX(2)
 
 var i = 0
 while i < args.count {
     switch args[i] {
-    case "-o":
+    case "-o", "--output":
         if i + 1 < args.count {
             i += 1
             output = args[i]
         }
-    case "-i":
+    case "-i", "--input":
         if i + 1 < args.count {
             i += 1
             directory = args[i]
+        }
+    case "-s", "--style":
+        if i + 1 < args.count {
+            i += 1
+            switch args[i].lowercased() {
+            case "latex", "xetex", "tex":
+                style = .laTeX(style.levelOffset)
+            case "tech", "techdoc", "techdocs":
+                style = .techDoc(style.levelOffset)
+            default:
+                print("""
+                That is not a valid style.
+
+                Valid styles are:
+                    latex
+                    techdoc
+                """)
+                exit(1)
+            }
+        }
+    case "-l", "--level":
+        if i + 1 < args.count {
+            i += 1
+            guard let l = Int(args[i]) else {
+                print("""
+                That is not a valid int.
+                """)
+                exit(1)
+            }
+            if l < 1 {
+                print("""
+                Level must be greater or equal to 1.
+                """)
+                exit(1)
+            }
+            style.levelOffset = l
         }
     default:
         break
@@ -75,7 +112,7 @@ for target in targets {
 
 
 
-let tex = TeXer.convert(objects: files.flatMap {$0.value})
+let tex = TeXer.convert(objects: files.flatMap {$0.value}, with: style)
 
 try? tex.write(toFile: output, atomically: true, encoding: .utf8)
 
