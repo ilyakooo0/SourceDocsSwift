@@ -11,10 +11,10 @@ brew install ilyakooo0/tap/sourceDocsSwift
 ## Использование
 
 ```bash
-sourceDocsSwift -i path/to/XcodePrjectDirectory/ -o path/to/output/docs.tex 
+sourceDocsSwift -i path/to/XcodePrjectDirectory/ -o path/to/output/doc.tex 
 ```
 
-По умолчанию ищет проект в текущей папке и пишет результат в эту же папку в файл `docas.tex`.
+По умолчанию ищет проект в текущей папке и пишет результат в эту же папку в файл `doc.tex`.
 
 В LaTeX документ можно вставить просто положив рядом с щсновным `.tex` документом и вставив в нужное место:
 
