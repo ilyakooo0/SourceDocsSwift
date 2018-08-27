@@ -55,7 +55,7 @@ var files: [String: [Object]] = [:]
 
 for target in targets {
     try? FileManager.default.removeItem(at: temp)
-    guard let skResponseData = Shell.launch(executable: "/usr/local/bin/sourcekitten", arguments: ["doc", "--", "-target", target, "CONFIGURATION_BUILD_DIR=\(temp)"], launchDirectory: directory) else {
+    guard let skResponseData = Shell.launch(executable: "/usr/local/bin/sourcekitten", arguments: ["doc", "--", "-target", target, "CONFIGURATION_BUILD_DIR=\(temp.absoluteString)"], launchDirectory: directory) else {
         print("""
         Make sure sourcekitten is installed
 
