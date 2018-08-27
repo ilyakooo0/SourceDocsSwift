@@ -9,7 +9,7 @@
 import Foundation
 
 let args = Array(CommandLine.arguments.dropFirst())
-let temp = FileManager.default.temporaryDirectory.appendingPathComponent("SourceDocsSwift/build\(Date().timeIntervalSince1970)")
+//let temp = FileManager.default.temporaryDirectory.appendingPathComponent("SourceDocsSwift/build\(Date().timeIntervalSince1970)", isDirectory: true)
 
 var output = "docs.tex"
 var directory: String?
@@ -54,8 +54,8 @@ let targets = xcbResponse.targets
 var files: [String: [Object]] = [:]
 
 for target in targets {
-    try? FileManager.default.removeItem(at: temp)
-    guard let skResponseData = Shell.launch(executable: "/usr/local/bin/sourcekitten", arguments: ["doc", "--", "-target", target, "CONFIGURATION_BUILD_DIR=\(temp.absoluteString)"], launchDirectory: directory) else {
+//    try? FileManager.default.removeItem(at: temp)
+    guard let skResponseData = Shell.launch(executable: "/usr/local/bin/sourcekitten", arguments: ["doc", "--", "-target", target], launchDirectory: directory) else {
         print("""
         Make sure sourcekitten is installed
 
