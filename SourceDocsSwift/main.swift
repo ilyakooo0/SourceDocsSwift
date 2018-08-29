@@ -70,6 +70,14 @@ while i < args.count {
     i += 1
 }
 
+var outputIsDirectory: ObjCBool = false
+
+FileManager.default.fileExists(atPath: output, isDirectory: &outputIsDirectory)
+
+if outputIsDirectory.boolValue {
+    output.append("/docs.tex")
+}
+
 let decoder = JSONDecoder()
 
 guard let xcbTagetData = Shell.launch(executable: "/usr/bin/xcodebuild", arguments: ["-list", "-json"], launchDirectory: directory) else {
@@ -113,8 +121,14 @@ for target in targets {
 
 
 let tex = TeXer.convert(objects: files.flatMap {$0.value}, with: style)
-
-try? tex.write(toFile: output, atomically: true, encoding: .utf8)
+do {
+    try tex.write(toFile: output, atomically: true, encoding: .utf8)
+} catch {
+    print("""
+    There was an error writing the outuput file.
+    """)
+    exit(1)
+}
 
 print("""
 +-------+

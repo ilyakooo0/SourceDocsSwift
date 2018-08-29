@@ -11,7 +11,7 @@ struct TeXer {
         return """
         \\\(style.section(for: 1)){Описание классов и структур}
         
-        \\begin{longtable}{| >{\\raggedright\\arraybackslash}p{0.55\\textwidth} | >{\\raggedright\\arraybackslash}p{0.4\\textwidth}|}
+        \\begin{longtable}{| >{\\raggedright\\arraybackslash}p{0.55\\textwidth} | p{0.4\\textwidth}|}
         \\hline
         \\textbf{Класс или стркура} & \\textbf{Описание} \\\\ \\hline
         \( objects.map {"\\texttt{\($0.declaration)} & {\\color{red} TODO} \\\\ \\hline"} .joined(separator: "\n") )
@@ -26,7 +26,7 @@ struct TeXer {
         return """
         \\\(style.section(for: 2))*{\\texttt{\($0.declaration)}}
         
-        \\begin{longtable}{| >{\\raggedright\\arraybackslash}p{0.55\\textwidth} | >{\\raggedright\\arraybackslash}p{0.4\\textwidth}|}
+        \\begin{longtable}{| >{\\raggedright\\arraybackslash}p{0.55\\textwidth} | p{0.4\\textwidth}|}
         \\hline
         \\textbf{Поле} & \\textbf{Описание} \\\\ \\hline
         \( $0.fields.map {"\\texttt{\($0.declaration.prefix {$0 != "="})} & {\\color{red} TODO} \\\\ \\hline"} .joined(separator: "\n") )
@@ -47,7 +47,7 @@ struct TeXer {
         return """
         \\\(style.section(for: 2))*{\\texttt{\($0.declaration)}}
         
-        \\begin{longtable}{| >{\\raggedright\\arraybackslash}p{0.55\\textwidth} | >{\\raggedright\\arraybackslash}p{0.4\\textwidth}|}
+        \\begin{longtable}{| >{\\raggedright\\arraybackslash}p{0.55\\textwidth} | p{0.4\\textwidth}|}
         \\hline
         \\textbf{Метод} & \\textbf{Описание} \\\\ \\hline
         \( $0.methods.map {"\\texttt{\($0.declaration)} & {\\color{red} TODO} \\\\ \\hline"} .joined(separator: "\n") )
